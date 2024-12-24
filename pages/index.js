@@ -1,5 +1,5 @@
 function HomePage() {
-    return <div>pikumin!</div>
+    return <div>pikumin2!</div>
 }
 
 export default HomePage
