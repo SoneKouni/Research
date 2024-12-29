@@ -3,7 +3,7 @@ import { GoogleMap, LoadScript, Marker, DirectionsRenderer, StandaloneSearchBox 
 
 const containerStyle = {
     width: '100%',
-    height: '500px',
+    height: '750px',
 };
 
 const center = {
@@ -12,6 +12,7 @@ const center = {
 };
 
 const Direction = () => {
+    const APIKey = process.env.NEXT_PUBLIC_API_KEY;
     const [pointA, setPointA] = useState(null); // 地点A
     const [pointB, setPointB] = useState(null); // 地点B
     const [directions, setDirections] = useState(null); // ルート情報
@@ -71,7 +72,7 @@ const Direction = () => {
     }, [pointA, pointB]);
 
     return (
-        <LoadScript googleMapsApiKey="AIzaSyCXng6CFfzTQxVIK9tMxq0PORoAtCBsT1o" libraries={['places']}>
+        <LoadScript googleMapsApiKey={APIKey} libraries={['places']}>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                 <StandaloneSearchBox
                     onLoad={ref => (searchBoxARef.current = ref)}
