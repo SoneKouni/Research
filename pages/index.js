@@ -1,5 +1,11 @@
-function HomePage() {
-    return <div>pikumin2!</div>
-}
+import Direction from '../components/Atoms/Direction';
 
-export default HomePage
+export default function HomePage() {
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <h1>橋梁迂回路</h1>
+            {/* 他のコンテンツ */}
+            <Direction />
+        </div>
+    );
+}
