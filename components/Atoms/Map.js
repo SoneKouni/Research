@@ -1,28 +1,31 @@
 import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 const containerStyle = {
     width: '100%',
-    height: '500px',
+    height: '650px'
 };
 
 const center = {
-    lat: 34.19861, // 山口の緯度
-    lng: 131.575, // 山口の経度
+    lat: 34.1859,
+    lng: 131.4714
 };
 
-const Map = () => {
+function Map() {
+    const apiKey = "AIzaSyCXng6CFfzTQxVIK9tMxq0PORoAtCBsT1o"; // 取得したAPIキーをここに入力
+
     return (
-        <LoadScript googleMapsApiKey="AIzaSyCXng6CFfzTQxVIK9tMxq0PORoAtCBsT1o"> {/* ここにAPIキーを入力 */}
+        <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
                 zoom={10}
             >
-                <Marker position={center} />
+                { /* Child components, such as markers, info windows, etc. */}
+                <></>
             </GoogleMap>
         </LoadScript>
-    );
-};
+    )
+}
 
-export default Map;
+export default React.memo(Map);

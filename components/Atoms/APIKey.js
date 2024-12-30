@@ -51,7 +51,7 @@ const APIKey = () => {
                         {bridges.map((bridge, index) => (
                             <Marker
                                 key={index}
-                                position={{ lat: bridge.latitude, lng: bridge.longitude }}
+                                position={{ lat: bridge.Lat, lng: bridge.Lng }}
                                 label={bridge.id.toString()}
                             />
                         ))}
