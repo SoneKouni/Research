@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Marker, DirectionsRenderer, StandaloneSearchBox } from '@react-google-maps/api';
+import APIKey from './KAPIKey'; // ここでAPIKeyをインポート
 
 const containerStyle = {
     width: '100%',
-    height: '750px',
+    height: '650px',
 };
 
 const center = {
