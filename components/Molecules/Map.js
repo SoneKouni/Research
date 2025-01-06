@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Marker, DirectionsRenderer, StandaloneSearchBox } from '@react-google-maps/api';
-import APIKey from './KAPIKey'; // ここでAPIKeyをインポート
-import Pin from './Pin';
 
 const containerStyle = {
     width: '100%',
@@ -102,7 +100,6 @@ const Direction = () => {
                 zoom={10}
                 onClick={handleMapClick}
             >
-                <Pin color="green" />
                 {pointA && <Marker position={pointA} />}
                 {pointB && <Marker position={pointB} />}
                 {directions && <DirectionsRenderer directions={directions} />}
