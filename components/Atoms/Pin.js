@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Marker } from '@react-google-maps/api';
+import InfoWindowContent from './InfoWindowContent';
 
 const pinColors = {
     blue: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
@@ -10,6 +11,7 @@ const pinColors = {
 
 const Pin = ({ color }) => {
     const [positions, setPositions] = useState([]);
+    const [selectedPosition, setSelectedPosition] = useState(null);
 
     useEffect(() => {
         const fetchBridgeData = async () => {
@@ -21,16 +23,13 @@ const Pin = ({ color }) => {
                     throw new Error(`HTTPエラー! 状態: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log('API Response:', data); // デバッグ用
-
-                // データの検証とマッピング
-                const positions = data
-                    .filter(bridge => bridge.Lat && bridge.Lng) // 緯度経度が存在するデータのみ
-                    .map(bridge => ({
-                        lat: parseFloat(bridge.Lat),
-                        lng: parseFloat(bridge.Lng)
-                    }));
-
+                // 全ての橋のデータを使用
+                const positions = data.map(bridge => ({
+                    lat: parseFloat(bridge.Lat),
+                    lng: parseFloat(bridge.Lng),
+                    name: bridge.Name,
+                    rank: bridge.Rank
+                }));
                 setPositions(positions);
             } catch (err) {
                 console.error('データの取得に失敗しました:', err);
@@ -45,8 +44,19 @@ const Pin = ({ color }) => {
     return (
         <>
             {positions.map((position, index) => (
-                <Marker key={index} position={position} icon={icon} />
+                <Marker
+                    key={index}
+                    position={{ lat: position.lat, lng: position.lng }}
+                    icon={icon}
+                    onClick={() => setSelectedPosition(position)}
+                />
             ))}
+            {selectedPosition && (
+                <InfoWindowContent
+                    selected={selectedPosition}
+                    onClose={() => setSelectedPosition(null)}
+                />
+            )}
         </>
     );
 };
