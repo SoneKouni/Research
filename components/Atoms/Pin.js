@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Marker } from '@react-google-maps/api';
-import InfoWindowContent from './InfoWindowContent';
+import { Marker, InfoWindow } from '@react-google-maps/api';
 
 const pinColors = {
     blue: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
@@ -23,12 +22,12 @@ const Pin = ({ color }) => {
                     throw new Error(`HTTPエラー! 状態: ${response.status}`);
                 }
                 const data = await response.json();
-                // 全ての橋のデータを使用
                 const positions = data.map(bridge => ({
                     lat: parseFloat(bridge.Lat),
                     lng: parseFloat(bridge.Lng),
                     name: bridge.Name,
-                    rank: bridge.Rank
+                    address: bridge.Address,
+                    tel: bridge.Tel,
                 }));
                 setPositions(positions);
             } catch (err) {
@@ -52,10 +51,16 @@ const Pin = ({ color }) => {
                 />
             ))}
             {selectedPosition && (
-                <InfoWindowContent
-                    selected={selectedPosition}
-                    onClose={() => setSelectedPosition(null)}
-                />
+                <InfoWindow
+                    position={{ lat: selectedPosition.lat + 0.001, lng: selectedPosition.lng }}
+                    onCloseClick={() => setSelectedPosition(null)}
+                >
+                    <div>
+                        <h4>{selectedPosition.name}</h4>
+                        <p>所在地： {selectedPosition.address}</p>
+                        <p>Tel： {selectedPosition.tel}</p>
+                    </div>
+                </InfoWindow>
             )}
         </>
     );
