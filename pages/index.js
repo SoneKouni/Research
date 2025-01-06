@@ -1,6 +1,6 @@
 import Direction from '../components/Atoms/Direction';
 import Search from '../components/Atoms/Search';
-import { Data } from '@react-google-maps/api';
+import Data from '../components/Atoms/data';
 import Pin from '../components/Atoms/Pin';
 
 export default function HomePage() {

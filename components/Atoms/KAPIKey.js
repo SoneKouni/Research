@@ -1,6 +1,5 @@
 const KAPIKey = {
-    apiKey: "59449ec6376845338c2f8010264f6c94",
-    endpoint: "https://example.com/api/bridges"
+    endpoint: "https://k-lab2.herokuapp.com/getopendata?ApiKey=9ea168d0f0b3459fa23a833b80739b2e"
 };
 
 export default KAPIKey;

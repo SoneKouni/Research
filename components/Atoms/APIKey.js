@@ -34,7 +34,7 @@ const APIKey = () => {
             <div style={{ textAlign: 'center', marginBottom: '10px' }}>
                 <input
                     type="text"
-                    placeholder="59449ec6376845338c2f8010264f6c94"
+                    placeholder="9ea168d0f0b3459fa23a833b80739b2e"
                     value={apiKey}
                     onChange={handleInputChange}
                     style={{ width: '300px', padding: '10px', fontSize: '14px', marginRight: '10px' }}

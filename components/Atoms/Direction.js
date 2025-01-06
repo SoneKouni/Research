@@ -102,7 +102,7 @@ const Direction = () => {
                 zoom={10}
                 onClick={handleMapClick}
             >
-                <Pin color="green" />
+                <Pin color="blue" />
                 {pointA && <Marker position={pointA} />}
                 {pointB && <Marker position={pointB} />}
                 {directions && <DirectionsRenderer directions={directions} />}
