@@ -11,6 +11,7 @@ const pinColors = {
 const Pin = ({ color }) => {
     const [positions, setPositions] = useState([]);
     const [selectedPosition, setSelectedPosition] = useState(null);
+    const [blockedPositions, setBlockedPositions] = useState([]);
 
     useEffect(() => {
         const fetchBridgeData = async () => {
@@ -27,6 +28,7 @@ const Pin = ({ color }) => {
                     lng: parseFloat(bridge.Lng),
                     name: bridge.Name,
                     address: bridge.Address,
+                    office: bridge.Office,
                     tel: bridge.Tel,
                 }));
                 setPositions(positions);
@@ -40,13 +42,18 @@ const Pin = ({ color }) => {
 
     const icon = pinColors[color] || pinColors.blue; // デフォルトは青色
 
+    const handleBlockClick = (position) => {
+        setBlockedPositions([...blockedPositions, position]);
+        alert('通行止めにされました');
+    };
+
     return (
         <>
             {positions.map((position, index) => (
                 <Marker
                     key={index}
                     position={{ lat: position.lat, lng: position.lng }}
-                    icon={icon}
+                    icon={blockedPositions.includes(position) ? 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png' : icon}
                     onClick={() => setSelectedPosition(position)}
                 />
             ))}
@@ -58,8 +65,11 @@ const Pin = ({ color }) => {
                     <div>
                         <h4>{selectedPosition.name}</h4>
                         <p>所在地： {selectedPosition.address}</p>
+                        <p>事務所： {selectedPosition.office}</p>
                         <p>Tel： {selectedPosition.tel}</p>
+                        <button onClick={() => handleBlockClick(selectedPosition)}>通行止め</button>
                     </div>
+
                 </InfoWindow>
             )}
         </>
